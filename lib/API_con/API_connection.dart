@@ -1,12 +1,12 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class APIConn{
+class API_connection{
   static var params = {
-    'per_page': '100',
+    'per_page': '30',
   };
 
-  static var uri =  Uri.https('https://api.unsplash.com/', 'photos', params);
+  static var uri =  Uri.https('api.unsplash.com', '/photos', params);
 
   static Future getPictures(){
     return http.get(
