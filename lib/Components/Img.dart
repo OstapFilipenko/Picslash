@@ -27,14 +27,18 @@ class _ImgViewState extends State<ImgView> {
   }
   
   static const double borderRadius = 20.0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new ListView.builder(  
+      child: new ListView.builder(
+        scrollDirection: Axis.horizontal,  
         itemCount: allImages.length,
         itemBuilder: (BuildContext ctxt, int index) {
           return new Container(
+            constraints: BoxConstraints(
+              minWidth: MediaQuery.of(context).size.width-20,
+              maxWidth: MediaQuery.of(context).size.width-20,
+            ),
             decoration: new BoxDecoration(
               image: DecorationImage(
                 image: NetworkImage(allImages[index].urls.regular),
@@ -51,10 +55,22 @@ class _ImgViewState extends State<ImgView> {
             margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
             child: Column(
               children: <Widget>[
-                new Text("ID: " + allImages[index].id),
-                new Text("description: " + allImages[index].description),
-                new Text("UserName: " + allImages[index].user.username),
-                new Text("Color: " + allImages[index].color),
+                new Container(
+                  constraints: BoxConstraints(
+                    minWidth: MediaQuery.of(context).size.width
+                  ),
+                  child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: new Text(
+                      allImages[index].description,
+                      style: TextStyle(
+                        backgroundColor: Colors.black.withOpacity(0.5),
+                        color: Colors.white
+                      )
+                    ),
+                  ),
+                ),
+                
               ],
             ),
           );
