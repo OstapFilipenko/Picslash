@@ -36,7 +36,10 @@ class _ImgViewState extends State<ImgView> {
         itemBuilder: (BuildContext ctxt, int index) {
           return new Container(
             decoration: new BoxDecoration(
-              color: Colors.blue,
+              image: DecorationImage(
+                image: NetworkImage(allImages[index].urls.regular),
+                fit: BoxFit.cover
+              ),
               borderRadius: new BorderRadius.only(
                 topLeft: Radius.circular(borderRadius),
                 topRight: Radius.circular(borderRadius),
@@ -50,7 +53,7 @@ class _ImgViewState extends State<ImgView> {
               children: <Widget>[
                 new Text("ID: " + allImages[index].id),
                 new Text("description: " + allImages[index].description),
-                new Text("description_alt: " + allImages[index].alt_description),
+                new Text("UserName: " + allImages[index].user.username),
                 new Text("Color: " + allImages[index].color),
               ],
             ),
