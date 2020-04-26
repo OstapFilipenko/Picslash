@@ -11,16 +11,12 @@ class ImgView extends StatefulWidget {
 
 class _ImgViewState extends State<ImgView> {
   var allImages =  new List<Picture>();
-
+  API_connection api_connection = new API_connection();
+  
   _getPics(){
-    API_connection.getPictures().then((response){
-      setState(() {
-        Iterable list = json.decode(response.body);
-        allImages = list.map((model) => Picture.fromJson(model)).toList();
-      });
-    });
+    allImages = api_connection.getPictures() as List<Picture>;
   }  
-
+  
 
   @override
   void initState() {

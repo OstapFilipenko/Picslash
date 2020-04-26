@@ -12,8 +12,8 @@ class Link{
   );
 
   Link.fromJson(Map<String, dynamic> json):
-    self = json['self'].toString(),
-    html = json['html'].toString(),
+    self = json['self'],
+    html = json['html'],
     download = json['download'],
     download_location = json['download_location'];
 

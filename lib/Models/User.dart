@@ -11,7 +11,7 @@ class User{
   final String portfolio_url;
   final String bio;
   final String location;
-  final ProfileImage profileImage;
+  final ProfileImage profile_image;
   final String instagram_username;
   final int total_collections;
   final int total_likes;
@@ -29,7 +29,7 @@ class User{
     this.portfolio_url, 
     this.bio, 
     this.location, 
-    this.profileImage, 
+    this.profile_image, 
     this.instagram_username, 
     this.total_collections, 
     this.total_likes, 
@@ -39,8 +39,8 @@ class User{
 
 
   User.fromJson(Map<String, dynamic> json):
-    id = json['id'].toString(),
-    updated_at = json['updated_at'].toString(),
+    id = json['id'],
+    updated_at = json['updated_at'],
     username = json['username'],
     name = json['name'],
     first_name = json['first_name'],
@@ -49,7 +49,7 @@ class User{
     portfolio_url = json['portfolio_url'],
     bio = json['bio'],
     location = json['location'],
-    profileImage = json['profileImage'],
+    profile_image = ProfileImage.fromJson(json['profile_image']),
     instagram_username = json['instagram_username'],
     total_collections = json['total_collections'],
     total_likes = json['total_likes'],
@@ -67,7 +67,7 @@ class User{
       'portfolio_url':portfolio_url,
       'bio': bio,
       'location': location,
-      'profileImage': profileImage,
+      'profile_image': profile_image,
       'instagram_username':instagram_username,
       'total_collections': total_collections,
       'total_likes': total_likes,

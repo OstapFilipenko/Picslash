@@ -14,8 +14,8 @@ class UrlM{
   );
   
   UrlM.fromJson(Map<String, dynamic> json):
-    raw = json['raw'].toString(),
-    full = json['full'].toString(),
+    raw = json['raw'],
+    full = json['full'],
     regular = json['regular'],
     small = json['small'],
     thumb = json['thumb'];

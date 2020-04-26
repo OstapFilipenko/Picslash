@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:picslash/Models/Link.dart';
 import 'package:picslash/Models/UrlM.dart';
 import 'package:picslash/Models/User.dart';
 
@@ -35,8 +34,8 @@ class Picture{
   );
 
   Picture.fromJson(Map<String, dynamic> json):
-    id = json['id'].toString(),
-    created_at = json['created_at'].toString(),
+    id = json['id'],
+    created_at = json['created_at'],
     updated_at = json['updated_at'],
     promoted_at = json['promoted_at'],
     width = json['width'],
@@ -44,10 +43,10 @@ class Picture{
     color = json['color'],
     description = json['description'],
     alt_description = json['alt_description'],
-    urls = json['urls'],
-    links = json['links'],
+    urls = UrlM.fromJson(json['urls']),
+    links = Link.fromJson(json['links']),
     likes = json['likes'],
-    user = json['user'];
+    user = User.fromJson(json['user']);
 
   Map<String, dynamic> toJson() =>{
       'id': id,

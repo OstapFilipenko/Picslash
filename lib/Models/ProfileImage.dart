@@ -10,8 +10,8 @@ class ProfileImage{
   );
 
   ProfileImage.fromJson(Map<String, dynamic> json):
-    small = json['small'].toString(),
-    medium = json['medium'].toString(),
+    small = json['small'],
+    medium = json['medium'],
     large = json['large'];
 
   Map<String, dynamic> toJson() =>{
