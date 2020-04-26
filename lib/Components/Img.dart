@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
@@ -11,10 +10,8 @@ class ImgView extends StatefulWidget {
 
 class _ImgViewState extends State<ImgView> {
   var allImages =  new List<Picture>();
-  API_connection api_connection = new API_connection();
-  
   _getPics() async {
-    allImages = await api_connection.getPictures() as List<Picture>;
+    allImages = await API_connection().getPictures();
   }  
   
 
@@ -51,10 +48,10 @@ class _ImgViewState extends State<ImgView> {
             margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
             child: Column(
               children: <Widget>[
-                Text("ID: " + allImages[index].id),
-                Text("Width: " + allImages[index].width.toString()),
-                Text("Height: " + allImages[index].height.toString()),
-                Text("Description: " + allImages[index].description),
+                new Text("ID: " + allImages[index].id),
+                new Text("description: " + allImages[index].description),
+                new Text("description_alt: " + allImages[index].alt_description),
+                new Text("Color: " + allImages[index].color),
               ],
             ),
           );

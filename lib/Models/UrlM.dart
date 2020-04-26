@@ -14,11 +14,11 @@ class UrlM{
   );
   
   UrlM.fromJson(Map<String, dynamic> json):
-    raw = json['raw'],
-    full = json['full'],
-    regular = json['regular'],
-    small = json['small'],
-    thumb = json['thumb'];
+    raw = json['raw'] == null ? "null" : json['raw'],
+    full = json['full'] == null ? "null" : json['full'],
+    regular = json['regular'] == null ? "null" : json['regular'],
+    small = json['small'] == null ? "null" : json['small'],
+    thumb = json['thumb'] == null ? "null" : json['thumb'];
 
   Map<String, dynamic> toJson() =>{
       'raw': raw,
