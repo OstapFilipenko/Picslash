@@ -13,8 +13,8 @@ class _ImgViewState extends State<ImgView> {
   var allImages =  new List<Picture>();
   API_connection api_connection = new API_connection();
   
-  _getPics(){
-    allImages = api_connection.getPictures() as List<Picture>;
+  _getPics() async {
+    allImages = await api_connection.getPictures() as List<Picture>;
   }  
   
 
