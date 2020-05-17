@@ -10,7 +10,7 @@ class API_connection{
   Future<List<Picture>> getPictures() async{
     List<Picture> list;
     var res = await http.get(
-      "https://api.unsplash.com//photos?per_page=10",
+      "https://api.unsplash.com//photos?per_page=20",
       headers: {
         'Accept-Version': 'v1',
         'Authorization': 'Client-ID fZZop4D9xtDfIsLvMVHAn8D9DAWoA0h4T2mqXJOUAkU',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
-
+import 'package:getflutter/getflutter.dart';
 
 class ImgView extends StatefulWidget {
   @override
@@ -31,46 +31,68 @@ class _ImgViewState extends State<ImgView> {
   Widget build(BuildContext context) {
     return Container(
       child: new ListView.builder(
-        scrollDirection: Axis.horizontal,  
+        scrollDirection: Axis.vertical,  
         itemCount: allImages.length,
         itemBuilder: (BuildContext ctxt, int index) {
           return new Container(
-            constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width-20,
-              maxWidth: MediaQuery.of(context).size.width-20,
-            ),
-            decoration: new BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(allImages[index].urls.regular),
-                fit: BoxFit.cover
-              ),
-              borderRadius: new BorderRadius.only(
-                topLeft: Radius.circular(borderRadius),
-                topRight: Radius.circular(borderRadius),
-                bottomLeft: Radius.circular(borderRadius),
-                bottomRight: Radius.circular(borderRadius),
-              )
-            ),
-            padding: const EdgeInsets.all(10.0),
-            margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-            child: Column(
+            margin: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 5.0),
+            child: new Column(
               children: <Widget>[
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    new Row(
+                      children: <Widget>[
+                        new GFAvatar(
+                          backgroundImage: NetworkImage(allImages[index].user.profile_image.large),
+                          size: 25.0,
+                        ),
+                        new Text(
+                          allImages[index].user.username,
+                          style: TextStyle(
+                            fontSize: 17.0,
+                          ),
+                          ),  
+                      ],
+                    ),
+                    new Flexible(
+                      child: new Text(
+                        "Instagram : @" + allImages[index].user.instagram_username
+                      ) 
+                    ),
+                    
+                  ],
+                ),
                 new Container(
                   constraints: BoxConstraints(
-                    minWidth: MediaQuery.of(context).size.width
+                    minWidth: MediaQuery.of(context).size.width,
+                    maxWidth: MediaQuery.of(context).size.width,
+                    minHeight: MediaQuery.of(context).size.height-100,
+                    maxHeight: MediaQuery.of(context).size.height-100,
                   ),
-                  child: FittedBox(
-                    fit: BoxFit.contain,
-                    child: new Text(
-                      allImages[index].description,
-                      style: TextStyle(
-                        backgroundColor: Colors.black.withOpacity(0.5),
-                        color: Colors.white
-                      )
+                  decoration: new BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(allImages[index].urls.regular),
+                      fit: BoxFit.cover
                     ),
+                    
                   ),
+                  padding: const EdgeInsets.all(10.0),
+                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                 ),
-                
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    new Row(
+                      children: <Widget>[
+                        new Icon(Icons.favorite_border),
+                        new Text(allImages[index].likes.toString()),
+                      ],
+                    ),
+                    
+                    new Text("Posted at: " + allImages[index].created_at.split("T")[0])
+                  ],
+                )
               ],
             ),
           );
