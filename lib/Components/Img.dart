@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
 import 'package:getflutter/getflutter.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class ImgView extends StatefulWidget {
   @override
@@ -63,22 +68,50 @@ class _ImgViewState extends State<ImgView> {
                     
                   ],
                 ),
-                new Container(
-                  constraints: BoxConstraints(
-                    minWidth: MediaQuery.of(context).size.width,
-                    maxWidth: MediaQuery.of(context).size.width,
-                    minHeight: MediaQuery.of(context).size.height-100,
-                    maxHeight: MediaQuery.of(context).size.height-100,
-                  ),
-                  decoration: new BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(allImages[index].urls.regular),
-                      fit: BoxFit.cover
+                new GestureDetector(
+                  onLongPress: (){
+                    showMenu(
+                      items: <PopupMenuEntry>[
+                        new PopupMenuItem(
+                          value: allImages[index],
+                          child: new GestureDetector(
+                            onTap: () async{
+                              var response = await http.get(allImages[index].links.download);
+                              var filePath = await ImagePickerSaver.saveFile(
+                                fileData: response.bodyBytes
+                              );
+                              var savedFile = File.fromUri(Uri.file(filePath));
+                            },
+                            child: Row(
+                              children: <Widget>[
+                                new Icon(Icons.file_download),
+                                new Text("Donwload")
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                      context: context,
+                      position: RelativeRect.fromLTRB(100.0, 100.0, 0.0, 0.0),
+                    );
+                  },
+                  child: new Container(
+                    constraints: BoxConstraints(
+                      minWidth: MediaQuery.of(context).size.width,
+                      maxWidth: MediaQuery.of(context).size.width,
+                      minHeight: MediaQuery.of(context).size.height-100,
+                      maxHeight: MediaQuery.of(context).size.height-100,
                     ),
-                    
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    decoration: new BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(allImages[index].urls.regular),
+                        fit: BoxFit.cover
+                      ),
+                      
+                    ),
+                    padding: const EdgeInsets.all(10.0),
+                    margin: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                  )
                 ),
                 new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -100,4 +133,6 @@ class _ImgViewState extends State<ImgView> {
       )
     );
   }
+
+  showContainer() {}
 }
