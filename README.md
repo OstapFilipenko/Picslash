@@ -1,6 +1,6 @@
 # picslash
 
-A new Flutter project.
+This app is getting Pictures from an API and displaying those pictures.
 
 ## Getting Started
 
