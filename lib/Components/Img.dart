@@ -1,12 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
 import 'package:getflutter/getflutter.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 
 class ImgView extends StatefulWidget {
   @override
@@ -76,11 +71,7 @@ class _ImgViewState extends State<ImgView> {
                           value: allImages[index],
                           child: new GestureDetector(
                             onTap: () async{
-                              var response = await http.get(allImages[index].links.download);
-                              var filePath = await ImagePickerSaver.saveFile(
-                                fileData: response.bodyBytes
-                              );
-                              var savedFile = File.fromUri(Uri.file(filePath));
+                              
                             },
                             child: Row(
                               children: <Widget>[
