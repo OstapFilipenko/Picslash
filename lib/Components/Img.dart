@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
 import 'package:getflutter/getflutter.dart';
-
 class ImgView extends StatefulWidget {
   @override
   _ImgViewState createState() => _ImgViewState();
@@ -47,12 +46,15 @@ class _ImgViewState extends State<ImgView> {
                           backgroundImage: NetworkImage(allImages[index].user.profile_image.large),
                           size: 25.0,
                         ),
-                        new Text(
-                          allImages[index].user.username,
-                          style: TextStyle(
-                            fontSize: 17.0,
+                        new Padding(
+                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: new Text(
+                            allImages[index].user.username,
+                            style: TextStyle(
+                              fontSize: 17.0, 
+                            ),
                           ),
-                          ),  
+                        ),
                       ],
                     ),
                     new Flexible(
@@ -71,7 +73,7 @@ class _ImgViewState extends State<ImgView> {
                           value: allImages[index],
                           child: new GestureDetector(
                             onTap: () async{
-                              
+
                             },
                             child: Row(
                               children: <Widget>[
@@ -109,7 +111,14 @@ class _ImgViewState extends State<ImgView> {
                   children: <Widget>[
                     new Row(
                       children: <Widget>[
-                        new Icon(Icons.favorite_border),
+                        new GestureDetector(
+                          onTap: (){
+                            //change color
+                          },
+                          child:new Icon(
+                            Icons.favorite_border,
+                          ),
+                        ),
                         new Text(allImages[index].likes.toString()),
                       ],
                     ),
@@ -124,6 +133,10 @@ class _ImgViewState extends State<ImgView> {
       )
     );
   }
+  
+  
 
   showContainer() {}
+
+  
 }
