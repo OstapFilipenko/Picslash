@@ -6,11 +6,14 @@ import 'dart:async';
 import 'package:picslash/Models/Picture.dart';
 
 class API_connection{
-
+  int page;
+  API_connection(int page){
+    this.page = page;
+  }
   Future<List<Picture>> getPictures() async{
     List<Picture> list;
     var res = await http.get(
-      "https://api.unsplash.com//photos?per_page=20",
+      "https://api.unsplash.com//photos?per_page=20&page=$page",
       headers: {
         'Accept-Version': 'v1',
         'Authorization': 'Client-ID fZZop4D9xtDfIsLvMVHAn8D9DAWoA0h4T2mqXJOUAkU',
