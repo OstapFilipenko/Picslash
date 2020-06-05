@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:picslash/API_con/API_connection.dart';
 import 'package:picslash/Models/Picture.dart';
 import 'package:getflutter/getflutter.dart';
+
+
 class ImgView extends StatefulWidget {
   @override
   _ImgViewState createState() => _ImgViewState();
@@ -10,23 +12,19 @@ class ImgView extends StatefulWidget {
 class _ImgViewState extends State<ImgView> {
   var allImages =  new List<Picture>();
   int counter = 1;
-  _getPics() async {
+  _getPics() async{
     allImages = await API_connection(1).getPictures();
   }
 
-  var newImages = new List<Picture>();
   _getNewPics() async{
     counter++;
-    newImages.clear();
-    newImages = await API_connection(counter).getPictures();
-    allImages.addAll(newImages);
+    allImages.addAll(await API_connection(counter).getPictures());
   }  
   
-
   @override
   void initState() {
-    super.initState();
     _getPics();
+    super.initState();
   }
 
   @override
@@ -50,8 +48,10 @@ class _ImgViewState extends State<ImgView> {
                             color: Colors.white
                           )
                         ),
-                  onPressed: () {
-                    _getNewPics();
+                  onPressed: (){
+                    setState(() {
+                    _getNewPics();  
+                    });
                   },
               ),
             )
