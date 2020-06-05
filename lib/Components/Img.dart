@@ -9,8 +9,17 @@ class ImgView extends StatefulWidget {
 
 class _ImgViewState extends State<ImgView> {
   var allImages =  new List<Picture>();
+  int counter = 1;
   _getPics() async {
     allImages = await API_connection(1).getPictures();
+  }
+
+  var newImages = new List<Picture>();
+  _getNewPics() async{
+    counter++;
+    newImages.clear();
+    newImages = await API_connection(counter).getPictures();
+    allImages.addAll(newImages);
   }  
   
 
@@ -34,10 +43,16 @@ class _ImgViewState extends State<ImgView> {
         itemBuilder: (BuildContext ctxt, int index) {
           return (index == allImages.length-1) ? 
             Container(
-              color: Colors.greenAccent,
+              color: Colors.blue,
               child: FlatButton(
-                  child: Text("Load More"),
-                  onPressed: () {},
+                  child: Text("Load More",
+                          style: new TextStyle(
+                            color: Colors.white
+                          )
+                        ),
+                  onPressed: () {
+                    _getNewPics();
+                  },
               ),
             )
             : new Container(
@@ -80,7 +95,7 @@ class _ImgViewState extends State<ImgView> {
                             value: allImages[index],
                             child: new GestureDetector(
                               onTap: () async{
-
+                                
                               },
                               child: Row(
                                 children: <Widget>[
